@@ -7,3 +7,12 @@ C:\Users\USER\Documents\Visual Studio 2013\Projects\GameCaro\GameCaro\obj\Debug\
 C:\Users\USER\Documents\Visual Studio 2013\Projects\GameCaro\GameCaro\obj\Debug\GameCaro.csproj.GenerateResource.Cache
 C:\Users\USER\Documents\Visual Studio 2013\Projects\GameCaro\GameCaro\obj\Debug\GameCaro.exe
 C:\Users\USER\Documents\Visual Studio 2013\Projects\GameCaro\GameCaro\obj\Debug\GameCaro.pdb
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\bin\Debug\GameCaro.exe.config
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\obj\Debug\GameCaro.exe
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\obj\Debug\GameCaro.pdb
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\bin\Debug\GameCaro.exe
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\bin\Debug\GameCaro.pdb
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\obj\Debug\GameCaro.csprojResolveAssemblyReference.cache
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\obj\Debug\GameCaro.Form1.resources
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\obj\Debug\GameCaro.Properties.Resources.resources
+C:\Users\USER\Desktop\Nhập môn AI\GameCaro_Assigment\GameCaro\GameCaro\obj\Debug\GameCaro.csproj.GenerateResource.Cache

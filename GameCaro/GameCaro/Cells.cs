@@ -15,8 +15,8 @@ namespace GameCaro
 
         private int _Column;
         private int _Rows;
-        private Point _ViTri;
-        private int _SoHuu;
+        private Point _Location;
+        private int _Owned;
 
 
         public Cells()
@@ -25,12 +25,12 @@ namespace GameCaro
             _Rows = 0;
         }
 
-        public Cells(int soDong, int soCot, Point vitri, int soHuu)
+        public Cells(int rows, int column, Point location, int owned)
         {
-            this._Column = soCot;
-            this._Rows = soDong;
-            this.ViTri = vitri;
-            this.SoHuu = soHuu;
+            this._Column = column;
+            this._Rows = rows;
+            this.Location = location;
+            this.Owned = owned;
         }
 
         public int Column
@@ -45,16 +45,16 @@ namespace GameCaro
             set { _Rows = value; }
         }
 
-        public Point ViTri
+        public Point Location
         {
-            get { return _ViTri; }
-            set { _ViTri = value; }
+            get { return _Location; }
+            set { _Location = value; }
         }
 
-        public int SoHuu
+        public int Owned
         {
-            get { return _SoHuu; }
-            set { _SoHuu = value; }
+            get { return _Owned; }
+            set { _Owned = value; }
         }
         
     }

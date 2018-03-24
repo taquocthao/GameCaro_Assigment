@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +30,10 @@ namespace GameCaro
 
         private int playWith = 0; // chơi với người = 1, với máy bằng 2
 
+        private SoundPlayer soundNewGame;
+
+        private EvaluateCell eval;
+
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +47,8 @@ namespace GameCaro
             //InitArrayCells();
             cacNuocDaDi = new Stack<Cells>();
             g = pnlBanCo.CreateGraphics();
+            soundNewGame = new SoundPlayer(Properties.Resources.NewGame);
+            eval = new EvaluateCell();
         }
 
         // khởi tạo mảng ô cờ
@@ -63,22 +70,22 @@ namespace GameCaro
                 return false;
             int col = x / Cells.WIDTH;
             int row = y / Cells.HEIGHT;
-            if (arrayCells[row, col].SoHuu != 0)
+            if (arrayCells[row, col].Owned != 0)
                 return false;
             switch (turn)
             {
                 case 1:
-                    arrayCells[row, col].SoHuu = 1;
-                    board.DrawPawn(g, arrayCells[row, col].ViTri, MyPaint.solidBlack());
+                    arrayCells[row, col].Owned = 1;
+                    board.DrawPawn(g, arrayCells[row, col].Location, MyPaint.solidBlack());
                     turn = 2;
                     break;
                 case 2:
-                    arrayCells[row, col].SoHuu = 2;
-                    board.DrawPawn(g, arrayCells[row, col].ViTri, MyPaint.solidRed());
+                    arrayCells[row, col].Owned = 2;
+                    board.DrawPawn(g, arrayCells[row, col].Location, MyPaint.solidRed());
                     turn = 1;
                     break;
             }
-            Cells cells = new Cells(arrayCells[row, col].Rows, arrayCells[row, col].Column, arrayCells[row, col].ViTri, arrayCells[row, col].SoHuu);
+            Cells cells = new Cells(arrayCells[row, col].Rows, arrayCells[row, col].Column, arrayCells[row, col].Location, arrayCells[row, col].Owned);
             cacNuocDaDi.Push(cells);
             return true;
         }
@@ -89,25 +96,32 @@ namespace GameCaro
         {
             foreach (Cells cel in cacNuocDaDi)
             {
-                if (cel.SoHuu == 1)
-                    board.DrawPawn(gr, cel.ViTri, MyPaint.solidBlack());
-                else if (cel.SoHuu == 2)
-                    board.DrawPawn(gr, cel.ViTri, MyPaint.solidRed());
+                if (cel.Owned == 1)
+                    board.DrawPawn(gr, cel.Location, MyPaint.solidBlack());
+                else if (cel.Owned == 2)
+                    board.DrawPawn(gr, cel.Location, MyPaint.solidRed());
             }
         }
 
         //hàm kiểm tra chiến thắng
         private bool IsEndGame()
         {
-            Cells cell = cacNuocDaDi.Pop();
-            if (state.isEndGame(cell.Rows, cell.Column, cell.SoHuu, arrayCells))
+            Cells cell = cacNuocDaDi.Peek();
+            if (cacNuocDaDi.Count == 0)
+                return false;
+            if (cacNuocDaDi.Count == board.NoOfRows * board.NoOfColumn)
             {
-                if (cell.SoHuu == 1)
+                MessageBox.Show("Hòa cờ");
+                return true;
+            }
+            if (state.isEndGame(cell.Rows, cell.Column, cell.Owned, arrayCells))
+            {
+                if (cell.Owned == 1)
                 {
                     MessageBox.Show("Quân đen chiến thắng!");
                     
                 }
-                else if (cell.SoHuu == 2)
+                else if (cell.Owned == 2)
                 {
                     MessageBox.Show("Quân đỏ chiến thắng!");
                 }
@@ -136,7 +150,9 @@ namespace GameCaro
                 }
                 else if(playWith == 2) // chế độ với máy
                 {
-
+                    MachineChess(g);
+                    if (IsEndGame())
+                        return;
                 }
                 
             }
@@ -197,7 +213,7 @@ namespace GameCaro
             g.Clear(pnlBanCo.BackColor);
             InitArrayCells(); //khởi tạo mảng ô cờ
             cacNuocDaDi = new Stack<Cells>();
-           // soundNewGame.Play();
+            soundNewGame.Play();
         }
 
 
@@ -214,13 +230,50 @@ namespace GameCaro
             ready = true;
             playWith = 2;
             StartGame();
+            MachineChess(g);
         }
         // máy đánh
-        private void MayDanh()
-        {
 
+        #region  AI
+
+        private void MachineChess(Graphics g)
+        {
+            if (cacNuocDaDi.Count == 0)
+            {
+                Chess(g, board.NoOfRows / 2 * Cells.WIDTH + 1, board.NoOfColumn / 2 * Cells.HEIGHT + 1);
+            }
+            else
+            {
+                Cells cell = FindMove();
+                Chess(g, cell.Location.X + 1, cell.Location.Y + 1);
+            }
         }
 
+        private Cells FindMove()
+        {
+            Cells cell = new Cells();
+            long diemMax = 0;
+            for (int i = 0; i < board.NoOfRows; i++)
+            {
+                for (int j = 0; j < board.NoOfColumn; j++)
+                {
+                    if (arrayCells[i, j].Owned == 0)
+                    {
+                        long DiemTanCong = eval.AttackScore(i, j, arrayCells);
+                        long DiemPhongNgu = eval.DenfenseScore(i, j, arrayCells);
+                        long DiemTam = DiemTanCong > DiemPhongNgu ? DiemTanCong : DiemPhongNgu;
+                        if (diemMax < DiemTam)
+                        {
+                            diemMax = DiemTam;
+                            cell = new Cells(arrayCells[i, j].Rows, arrayCells[i, j].Column, arrayCells[i, j].Location, arrayCells[i, j].Owned);
+                        }
+                    }
+                }
+            }
+            return cell;
+        }
+
+        #endregion
 
 
         #region Hiệu ứng trên lable
@@ -257,6 +310,7 @@ namespace GameCaro
 
         #endregion
 
-       
+
+        
     }
 }

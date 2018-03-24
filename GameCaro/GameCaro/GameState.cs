@@ -11,7 +11,6 @@ namespace GameCaro
     class GameState
     {
 
-        public static Cells[,] arrayCells;
         private BoardGame board;
 
         public GameState()
@@ -33,7 +32,7 @@ namespace GameCaro
             int temp = currentRow;
             for (int i = currentRow; i >= 0; i--)
             {
-                if (arrayCells[currentRow--, currentCol].SoHuu == owner)
+                if (arrayCells[currentRow--, currentCol].Owned == owner)
                 {
                     countTop++;
                 }
@@ -44,7 +43,7 @@ namespace GameCaro
 
             for (int j = currentRow; j < board.NoOfRows; j++)
             {
-                if (arrayCells[currentRow++, currentCol].SoHuu == owner)
+                if (arrayCells[currentRow++, currentCol].Owned == owner)
                     countBottom++;
                 else
                     break;
@@ -59,7 +58,7 @@ namespace GameCaro
             int temp = currenCol;
             for (int i = currenCol; i >= 0; i--)
             {
-                if (arrayCells[currentRow, currenCol--].SoHuu == owner)
+                if (arrayCells[currentRow, currenCol--].Owned == owner)
                 {
                     countLeft++;
                 }
@@ -69,7 +68,7 @@ namespace GameCaro
             currenCol = temp;
             for (int j = currenCol; j < board.NoOfColumn; j++)
             {
-                if (arrayCells[currentRow, currenCol++].SoHuu == owner)
+                if (arrayCells[currentRow, currenCol++].Owned == owner)
                     countRight++;
                 else
                     break;
@@ -87,14 +86,14 @@ namespace GameCaro
 
             if ((currentRow == 0 && currentCol == 0) || (currentCol == 0))
             {
-                if (owner == arrayCells[currentRow++, currentCol++].SoHuu)
+                if (owner == arrayCells[currentRow++, currentCol++].Owned)
                     countCheoTren++;
             }
             else if ((currentRow == 0 && currentCol == (board.NoOfColumn - 1)) || currentRow < 4 && currentCol == (board.NoOfColumn - 1))
                 return false;
             else if (currentCol == (board.NoOfColumn - 1) && currentRow >= 4)
             {
-                if (owner == arrayCells[currentRow--, currentCol--].SoHuu)
+                if (owner == arrayCells[currentRow--, currentCol--].Owned)
                     countCheoTren++;
                 else
                     return false;
@@ -107,7 +106,7 @@ namespace GameCaro
             {
                 for (int i = currentRow; i >= 0 && currentCol >= 0; i--)
                 {
-                    if (owner == arrayCells[currentRow--, currentCol--].SoHuu)
+                    if (owner == arrayCells[currentRow--, currentCol--].Owned)
                         countCheoTren++;
                     else
                         break;
@@ -118,7 +117,7 @@ namespace GameCaro
 
                 for (int i = currentRow; i < board.NoOfRows && currentCol < board.NoOfColumn; i++)
                 {
-                    if (owner == arrayCells[currentRow++, currentCol++].SoHuu)
+                    if (owner == arrayCells[currentRow++, currentCol++].Owned)
                         countCheoDuoi++;
                     else break;
                 }
@@ -148,7 +147,7 @@ namespace GameCaro
             {
                 for (int i = 0; i < board.NoOfRows && currentCol >= 0; i++)
                 {
-                    if (owner == arrayCells[currentRow++, currentCol--].SoHuu)
+                    if (owner == arrayCells[currentRow++, currentCol--].Owned)
                         countCheoDuoi++;
                     else
                         break;
@@ -159,7 +158,7 @@ namespace GameCaro
             {
                 for (int i = currentRow; i >= 0 && currentCol >= board.NoOfColumn - 1; i--)
                 {
-                    if (owner == arrayCells[currentRow--, currentCol++].SoHuu)
+                    if (owner == arrayCells[currentRow--, currentCol++].Owned)
                         countCheoTren++;
                     else
                         break;
@@ -170,7 +169,7 @@ namespace GameCaro
             {
                 for (int i = currentRow; i >= 0 && currentCol < board.NoOfColumn; i++)
                 {
-                    if (owner == arrayCells[currentRow--, currentCol++].SoHuu)
+                    if (owner == arrayCells[currentRow--, currentCol++].Owned)
                         countCheoTren++;
                     else
                         break;
@@ -183,7 +182,7 @@ namespace GameCaro
             {
                 for (int i = currentRow; i >= 0 && (currentCol < board.NoOfColumn); i--)
                 {
-                    if (owner == arrayCells[currentRow--, currentCol++].SoHuu)
+                    if (owner == arrayCells[currentRow--, currentCol++].Owned)
                         countCheoTren++;
                     else
                         break;
@@ -194,7 +193,7 @@ namespace GameCaro
 
                 for (int j = currentRow; j < board.NoOfRows && currentCol >= 0; j++)
                 {
-                    if (owner == arrayCells[currentRow++, currentCol--].SoHuu)
+                    if (owner == arrayCells[currentRow++, currentCol--].Owned)
                         countCheoDuoi++;
                     else
                         break;
