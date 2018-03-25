@@ -79,128 +79,50 @@ namespace GameCaro
         // duyệt đường chéo xuôi
         private bool isMainDiagonal(int currentRow, int currentCol, int owner, Cells[,] arrayCells)
         {
-            int countCheoTren = 0;
-            int countCheoDuoi = 0;
-            int temp1 = currentRow;
-            int temp2 = currentCol;
+            int countUp = 0;
+            int countDown = 0;         
 
-            if ((currentRow == 0 && currentCol == 0) || (currentCol == 0))
+            for (int i = 1; i < 6 && currentRow - i >= 0 && currentCol - i >= 0; i++)
             {
-                if (owner == arrayCells[currentRow++, currentCol++].Owned)
-                    countCheoTren++;
-            }
-            else if ((currentRow == 0 && currentCol == (board.NoOfColumn - 1)) || currentRow < 4 && currentCol == (board.NoOfColumn - 1))
-                return false;
-            else if (currentCol == (board.NoOfColumn - 1) && currentRow >= 4)
-            {
-                if (owner == arrayCells[currentRow--, currentCol--].Owned)
-                    countCheoTren++;
+                if (owner == arrayCells[currentRow - i, currentCol - i].Owned)
+                    countUp++;
                 else
-                    return false;
+                    break;
             }
-            else if (currentCol == 0 && currentRow >= (board.NoOfRows - 5))
-                return false;
-            else if (currentRow == (board.NoOfRows - 1) && currentCol < 4)
-                return false;
-            else
+            for (int i = 0; i < 6 && currentRow + i < board.NoOfRows && currentCol + i < board.NoOfColumn; i++)
             {
-                for (int i = currentRow; i >= 0 && currentCol >= 0; i--)
-                {
-                    if (owner == arrayCells[currentRow--, currentCol--].Owned)
-                        countCheoTren++;
-                    else
-                        break;
-                }
-
-                currentRow = temp1;
-                currentCol = temp2;
-
-                for (int i = currentRow; i < board.NoOfRows && currentCol < board.NoOfColumn; i++)
-                {
-                    if (owner == arrayCells[currentRow++, currentCol++].Owned)
-                        countCheoDuoi++;
-                    else break;
-                }
+                if (owner == arrayCells[currentRow + i, currentCol + i].Owned)
+                    countDown++;
+                else
+                    break;
             }
-
-            return ((countCheoTren + countCheoDuoi) >= 6);
+                return ((countUp + countDown) >= 5);
         }
 
 
         //đường chéo ngược
         private bool isSecondDiagonal(int currentRow, int currentCol, int owner, Cells[,] arrayCells)
         {
-            int countCheoTren = 0;
-            int countCheoDuoi = 0;
-            int temp1 = currentRow;
-            int temp2 = currentCol;
+            int countUp = 0;
+            int countDown = 0;
 
-
-            if ((currentCol == 0 && currentRow <= 3) || (currentRow == 0 && currentCol <= 3))
-                return false;
-
-            else if ((currentCol == board.NoOfColumn - 1 && currentRow > board.NoOfRows - 5) ||
-                (currentRow == board.NoOfRows - 1 && currentCol > board.NoOfColumn - 5))
-                return false;
-            //người chơi đánh tại vị trí viền bên phải bàn cờ
-            else if ((currentRow == 0 && currentCol == board.NoOfColumn - 1) || currentCol == board.NoOfColumn - 1)
+            for (int i = 1; i < 6 && currentCol + i < board.NoOfColumn && currentRow - i >= 0; i++)
             {
-                for (int i = 0; i < board.NoOfRows && currentCol >= 0; i++)
-                {
-                    if (owner == arrayCells[currentRow++, currentCol--].Owned)
-                        countCheoDuoi++;
-                    else
-                        break;
-                }
-            }
-            // cột bên trái
-            else if ((currentCol == 0 && currentRow == board.NoOfRows - 1) || currentCol == 0 && currentRow >= 3)
-            {
-                for (int i = currentRow; i >= 0 && currentCol >= board.NoOfColumn - 1; i--)
-                {
-                    if (owner == arrayCells[currentRow--, currentCol++].Owned)
-                        countCheoTren++;
-                    else
-                        break;
-                }
-            }
-            // dòng cuối bàn cờ
-            else if (currentRow == board.NoOfRows - 1)
-            {
-                for (int i = currentRow; i >= 0 && currentCol < board.NoOfColumn; i++)
-                {
-                    if (owner == arrayCells[currentRow--, currentCol++].Owned)
-                        countCheoTren++;
-                    else
-                        break;
-                }
-            }
-            /*
-             *nếu người chơi đánh quân cờ không nằm trên các đường biên của bàn cờ 
-             */
-            else if (currentRow > 0 && currentCol > 0 && currentRow < board.NoOfRows - 1 && currentCol < board.NoOfColumn - 1)
-            {
-                for (int i = currentRow; i >= 0 && (currentCol < board.NoOfColumn); i--)
-                {
-                    if (owner == arrayCells[currentRow--, currentCol++].Owned)
-                        countCheoTren++;
-                    else
-                        break;
-                }
-
-                currentRow = temp1;
-                currentCol = temp2;
-
-                for (int j = currentRow; j < board.NoOfRows && currentCol >= 0; j++)
-                {
-                    if (owner == arrayCells[currentRow++, currentCol--].Owned)
-                        countCheoDuoi++;
-                    else
-                        break;
-                }
+                if (owner == arrayCells[currentRow - i, currentCol + i].Owned)
+                    countUp++;
+                else
+                    break;
             }
 
-            return (countCheoTren + countCheoDuoi >= 5);
+            for (int i = 0; i < 6 && currentRow + i < board.NoOfRows && currentCol - i >= 0; i++ )
+            {
+                if (owner == arrayCells[currentRow + i, currentCol - i].Owned)
+                    countDown++;
+                else
+                    break;
+            }
+
+            return ((countUp + countDown) >= 5);
         }
     }
 }

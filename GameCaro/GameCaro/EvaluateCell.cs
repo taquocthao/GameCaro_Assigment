@@ -16,8 +16,6 @@ namespace GameCaro
             board = new BoardGame(19, 19);
         }
 
-        
-
         public long AttackScore(int currentRow, int currentColumn, Cells[,] arrayCells)
         {
             long score = AttackVertical(currentRow, currentColumn, arrayCells) + AttackHorizal(currentRow, currentColumn, arrayCells)
@@ -65,8 +63,6 @@ namespace GameCaro
                     break;
 
             }
-            if (countPlayer == 2)
-                return 0;
             score -= DENFENSE_SCORE[countPlayer + 1];
             score += ATTACK_SCORE[countComputer];
             return score;
@@ -103,14 +99,13 @@ namespace GameCaro
                     break;
 
             }
-            if (countPlayer == 2)
-                return 0;
+  
             score -= DENFENSE_SCORE[countPlayer + 1];
             score += ATTACK_SCORE[countComputer];
             return score;
         }
 
-        private long AttackMainDiagonal(int currentRow, int currentColumn,Cells[,] arrayCells) // "/"
+        private long AttackMainDiagonal(int currentRow, int currentColumn,Cells[,] arrayCells) // "\"
         {
             int countPlayer = 0;
             int countComputer = 0;
@@ -141,23 +136,21 @@ namespace GameCaro
                     break;
 
             }
-            if (countPlayer == 2)
-                return 0;
             score -= DENFENSE_SCORE[countPlayer + 1];
             score += ATTACK_SCORE[countComputer];
             return score;
         }
-
-        private long AttackSecondDiagonal(int currentRow, int currentColumn, Cells[,] arrayCells) // "\"
+  
+        private long AttackSecondDiagonal(int currentRow, int currentColumn, Cells[,] arrayCells) // "/"
         {
             int countPlayer = 0;
             int countComputer = 0;
             long score = 0;
-            for (int Dem = 1; Dem < 6 && currentColumn + Dem < board.NoOfColumn && currentRow + Dem < board.NoOfRows; Dem++)
+            for (int Dem = 1; Dem < 6 && currentColumn - Dem >= 0 && currentRow + Dem < board.NoOfRows; Dem++)
             {
-                if (arrayCells[currentRow + Dem, currentColumn + Dem].Owned == 1)
+                if (arrayCells[currentRow + Dem, currentColumn - Dem].Owned == 1)
                     countComputer++;
-                else if (arrayCells[currentRow + Dem, currentColumn + Dem].Owned == 2)
+                else if (arrayCells[currentRow + Dem, currentColumn - Dem].Owned == 2)
                 {
                     countPlayer++;
                     break;
@@ -166,11 +159,11 @@ namespace GameCaro
                     break;
 
             }
-            for (int Dem = 1; Dem < 6 && currentColumn - Dem >= 0 && currentRow - Dem >= 0; Dem++)
+            for (int Dem = 1; Dem < 6 && currentColumn + Dem < board.NoOfColumn && currentRow - Dem >= 0; Dem++)
             {
-                if (arrayCells[currentRow - Dem, currentColumn - Dem].Owned == 1)
+                if (arrayCells[currentRow - Dem, currentColumn + Dem].Owned == 1)
                     countComputer++;
-                else if (arrayCells[currentRow - Dem, currentColumn - Dem].Owned == 2)
+                else if (arrayCells[currentRow - Dem, currentColumn + Dem].Owned == 2)
                 {
                     countPlayer++;
                     break;
@@ -179,8 +172,6 @@ namespace GameCaro
                     break;
 
             }
-            if (countPlayer == 2)
-                return 0;
             score -= DENFENSE_SCORE[countPlayer + 1];
             score += ATTACK_SCORE[countComputer];
             return score;
@@ -227,8 +218,6 @@ namespace GameCaro
                     break;
 
             }
-            if (countComputer == 2)
-                return 0;
             score += DENFENSE_SCORE[countPlayer];
             return score;
         }
@@ -269,63 +258,18 @@ namespace GameCaro
                     break;
 
             }
-            if (countComputer == 2)
-                return 0;
             score += DENFENSE_SCORE[countPlayer];
             return score;
         }
 
-        private long DenfenseMainDiagonal(int currentRow, int currentColumn, Cells[,] arrayCells) // "/"
+        private long DenfenseMainDiagonal(int currentRow, int currentColumn, Cells[,] arrayCells) // "\"
         {
             int countPlayer = 0;
             int countComputer = 0;
             long score = 0;
-            for (int Dem = 1; Dem < 6 && currentColumn + Dem < board.NoOfRows; Dem++)
+            for (int Dem = 1; Dem < 6 && currentColumn + Dem < board.NoOfRows && currentRow + Dem < board.NoOfRows; Dem++)
             {
-                if (arrayCells[currentRow, currentColumn + Dem].Owned == 1)
-                {
-                    countComputer++;
-                    break;
-                }
-
-                else if (arrayCells[currentRow, currentColumn + Dem].Owned == 2)
-                {
-                    countPlayer++;
-                }
-                else
-                    break;
-
-            }
-            for (int Dem = 1; Dem < 6 && currentColumn - Dem >= 0; Dem++)
-            {
-                if (arrayCells[currentRow, currentColumn - Dem].Owned == 1)
-                {
-                    countComputer++;
-                    break;
-                }
-                else if (arrayCells[currentRow, currentColumn - Dem].Owned == 2)
-                {
-                    countPlayer++;
-                }
-                else
-                    break;
-
-            }
-            if (countComputer == 2)
-                return 0;
-            score += DENFENSE_SCORE[countPlayer];
-            return score;
-        }
-
-        private long DenfenseSecondDiagonal(int currentRow, int currentColumn, Cells[,] arrayCells) // "\"
-        {
-            int countPlayer = 0;
-            int countComputer = 0;
-            long score = 0;
-            for (int Dem = 1; Dem < 6 && currentColumn + Dem < board.NoOfColumn && currentRow + Dem < board.NoOfRows; Dem++)
-            {
-
-                if (arrayCells[currentRow + Dem, currentColumn + Dem].Owned == 1)
+                if (arrayCells[currentRow+ Dem, currentColumn + Dem].Owned == 1)
                 {
                     countComputer++;
                     break;
@@ -334,7 +278,6 @@ namespace GameCaro
                 else if (arrayCells[currentRow + Dem, currentColumn + Dem].Owned == 2)
                 {
                     countPlayer++;
-
                 }
                 else
                     break;
@@ -347,7 +290,6 @@ namespace GameCaro
                     countComputer++;
                     break;
                 }
-
                 else if (arrayCells[currentRow - Dem, currentColumn - Dem].Owned == 2)
                 {
                     countPlayer++;
@@ -356,8 +298,49 @@ namespace GameCaro
                     break;
 
             }
-            if (countComputer == 2)
-                return 0;
+            score += DENFENSE_SCORE[countPlayer];
+            return score;
+        }
+
+        private long DenfenseSecondDiagonal(int currentRow, int currentColumn, Cells[,] arrayCells) // "/"
+        {
+            int countPlayer = 0;
+            int countComputer = 0;
+            long score = 0;
+            for (int Dem = 1; Dem < 6 && currentColumn - Dem >= 0 && currentRow + Dem < board.NoOfRows; Dem++)
+            {
+
+                if (arrayCells[currentRow + Dem, currentColumn - Dem].Owned == 1)
+                {
+                    countComputer++;
+                    break;
+                }
+
+                else if (arrayCells[currentRow + Dem, currentColumn - Dem].Owned == 2)
+                {
+                    countPlayer++;
+
+                }
+                else
+                    break;
+
+            }
+            for (int Dem = 1; Dem < 6 && currentColumn + Dem < board.NoOfColumn && currentRow - Dem >= 0; Dem++)
+            {
+                if (arrayCells[currentRow - Dem, currentColumn + Dem].Owned == 1)
+                {
+                    countComputer++;
+                    break;
+                }
+
+                else if (arrayCells[currentRow - Dem, currentColumn + Dem].Owned == 2)
+                {
+                    countPlayer++;
+                }
+                else
+                    break;
+
+            }
             score += DENFENSE_SCORE[countPlayer];
             return score;
         }

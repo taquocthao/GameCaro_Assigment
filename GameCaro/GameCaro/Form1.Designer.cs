@@ -29,18 +29,17 @@
         private void InitializeComponent()
         {
             this.pnlBanCo = new System.Windows.Forms.Panel();
+            this.lblThoat = new System.Windows.Forms.Label();
+            this.lblPlayerVsComputer = new System.Windows.Forms.Label();
+            this.lblPlayerVsPlayer = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chơiVớiNgườiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đánhVớiMáyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thoátToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblThoat = new System.Windows.Forms.Label();
-            this.lblPlayerVsComputer = new System.Windows.Forms.Label();
-            this.lblPlayerVsPlayer = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBanCo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,71 +56,6 @@
             this.pnlBanCo.TabIndex = 0;
             this.pnlBanCo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBanCo_Paint);
             this.pnlBanCo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlBanCo_MouseClick);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gameToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(525, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // gameToolStripMenuItem
-            // 
-            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGameToolStripMenuItem,
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem,
-            this.thoátToolStripMenuItem});
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "Game";
-            // 
-            // newGameToolStripMenuItem
-            // 
-            this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chơiVớiNgườiToolStripMenuItem,
-            this.đánhVớiMáyToolStripMenuItem});
-            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newGameToolStripMenuItem.Text = "New game";
-            // 
-            // chơiVớiNgườiToolStripMenuItem
-            // 
-            this.chơiVớiNgườiToolStripMenuItem.Name = "chơiVớiNgườiToolStripMenuItem";
-            this.chơiVớiNgườiToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.chơiVớiNgườiToolStripMenuItem.Text = "Đánh với người";
-            this.chơiVớiNgườiToolStripMenuItem.Click += new System.EventHandler(this.chơiVớiNgườiToolStripMenuItem_Click);
-            // 
-            // đánhVớiMáyToolStripMenuItem
-            // 
-            this.đánhVớiMáyToolStripMenuItem.Name = "đánhVớiMáyToolStripMenuItem";
-            this.đánhVớiMáyToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.đánhVớiMáyToolStripMenuItem.Text = "Đánh với máy";
-            this.đánhVớiMáyToolStripMenuItem.Click += new System.EventHandler(this.đánhVớiMáyToolStripMenuItem_Click);
-            // 
-            // undoToolStripMenuItem
-            // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.undoToolStripMenuItem.Text = "Undo";
-            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
-            // 
-            // redoToolStripMenuItem
-            // 
-            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.redoToolStripMenuItem.Text = "Redo";
-            this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
-            // 
-            // thoátToolStripMenuItem
-            // 
-            this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.thoátToolStripMenuItem.Text = "Thoát";
-            this.thoátToolStripMenuItem.Click += new System.EventHandler(this.thoátToolStripMenuItem_Click);
             // 
             // lblThoat
             // 
@@ -184,6 +118,63 @@
             this.label1.Text = "New game!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gameToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(525, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem,
+            this.thoátToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Text = "Game";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chơiVớiNgườiToolStripMenuItem,
+            this.đánhVớiMáyToolStripMenuItem});
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newGameToolStripMenuItem.Text = "New game";
+            // 
+            // chơiVớiNgườiToolStripMenuItem
+            // 
+            this.chơiVớiNgườiToolStripMenuItem.Name = "chơiVớiNgườiToolStripMenuItem";
+            this.chơiVớiNgườiToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.chơiVớiNgườiToolStripMenuItem.Text = "Đánh với người";
+            this.chơiVớiNgườiToolStripMenuItem.Click += new System.EventHandler(this.chơiVớiNgườiToolStripMenuItem_Click);
+            // 
+            // đánhVớiMáyToolStripMenuItem
+            // 
+            this.đánhVớiMáyToolStripMenuItem.Name = "đánhVớiMáyToolStripMenuItem";
+            this.đánhVớiMáyToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.đánhVớiMáyToolStripMenuItem.Text = "Đánh với máy";
+            this.đánhVớiMáyToolStripMenuItem.Click += new System.EventHandler(this.đánhVớiMáyToolStripMenuItem_Click);
+            // 
+            // thoátToolStripMenuItem
+            // 
+            this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
+            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.thoátToolStripMenuItem.Text = "Thoát";
+            this.thoátToolStripMenuItem.Click += new System.EventHandler(this.thoátToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,13 +202,12 @@
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chơiVớiNgườiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem đánhVớiMáyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thoátToolStripMenuItem;
         private System.Windows.Forms.Label lblThoat;
         private System.Windows.Forms.Label lblPlayerVsComputer;
         private System.Windows.Forms.Label lblPlayerVsPlayer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

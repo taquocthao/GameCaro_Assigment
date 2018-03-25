@@ -172,16 +172,6 @@ namespace GameCaro
             board.DrawBoardGame(g);
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -252,19 +242,19 @@ namespace GameCaro
         private Cells FindMove()
         {
             Cells cell = new Cells();
-            long diemMax = 0;
+            long score = 0;
             for (int i = 0; i < board.NoOfRows; i++)
             {
                 for (int j = 0; j < board.NoOfColumn; j++)
                 {
                     if (arrayCells[i, j].Owned == 0)
                     {
-                        long DiemTanCong = eval.AttackScore(i, j, arrayCells);
-                        long DiemPhongNgu = eval.DenfenseScore(i, j, arrayCells);
-                        long DiemTam = DiemTanCong > DiemPhongNgu ? DiemTanCong : DiemPhongNgu;
-                        if (diemMax < DiemTam)
+                        long attackScore = eval.AttackScore(i, j, arrayCells);
+                        long DenfenseScore = eval.DenfenseScore(i, j, arrayCells);
+                        long tempScore = attackScore > DenfenseScore ? attackScore : DenfenseScore;
+                        if (score < tempScore)
                         {
-                            diemMax = DiemTam;
+                            score = tempScore;
                             cell = new Cells(arrayCells[i, j].Rows, arrayCells[i, j].Column, arrayCells[i, j].Location, arrayCells[i, j].Owned);
                         }
                     }
@@ -309,6 +299,14 @@ namespace GameCaro
         }
 
         #endregion
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("phiên bản caro-v1.0\n\nNhóm thực hiện:\n\tTạ Quốc Thảo - 5140342\n\t Trần Nguyễn Hữu Nhật", 
+                "Thông tin tác giả",
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Information);
+        }
 
 
         
